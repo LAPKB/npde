@@ -4,9 +4,12 @@ Title: Normalised prediction distribution errors for nonlinear
         mixed-effect models
 Version: 2.0.1
 Date: 2020-06-12
-Author: Emmanuelle Comets, Karl Brendel, Thi Huyen Tram Nguyen, France
-        Mentre.
-Maintainer: Michael Neely (mneely@usc.edu)
+Authors@R: c(person("Emmanuelle", "Comets","",role = "aut"),
+  person("Karl", "Brendel", role = "aut"),
+  person("Thi", "Huyen", role = "aut"),
+  person("Tram", "Nguyen", role = "aut"),
+  person("France", "Mentre", role = "aut"),
+  person("Michael", "Neely",email = "mneely@usc.edu", role = "cre"))
 Description: Routines to compute normalised prediction distribution errors, a metric designed to evaluate non-linear mixed effect models such as those used in pharmacokinetics and pharmacodynamics.
 License: GPL (>= 2)
 LazyLoad: yes
