@@ -576,6 +576,25 @@ calcnpde<-function(isuj,yobs,matsim,nrep,decorr.method,verbose) {
 	#variance-covariance matrix computed using the cov function
 	#Computing ypred
 	varsim<-cov(t(matsim))
+	
+	#ensure that it is pos-def
+	posdef <- eigen(signif(varsim, 15))
+	if (any(posdef$values < 0)) {
+	  cat("Warning: your covariance matrix is not positive definite.\nThis is typically due to small population size.\n")
+	  ans <- readline("\nChoose one of the following:\n1) end simulation\n2) fix covariance\n3) set covariances to 0\n ")
+	  if (ans == 1) stop()
+	  if (ans == 2) {
+	    #checkRequiredPackages("matrix")
+	    varsim <- as.matrix(Matrix::nearPD(as.matrix(varsim), keepDiag = T)$mat)
+	  }
+	  if (ans == 3) {
+	    varsim2 <- diag(0, nrow(varsim))
+	    diag(varsim2) <- diag(varsim)
+	    varsim <- varsim2
+	  }
+	}
+	
+	
 	moysim<-rowMeans(matsim)
 	#computing V-1/2 with Cholesky
 	xerr<-0
