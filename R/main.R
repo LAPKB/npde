@@ -128,14 +128,19 @@ npde<-function() {
 }
 
 #' @export
-autonpde<-function(namobs,namsim,iid,ix,iy,imdv=0,icens=0,icov=0, iipred=0,boolsave=TRUE,namsav="output",type.graph="eps",verbose=FALSE, calc.npde=TRUE,calc.pd=TRUE,decorr.method="cholesky",cens.method="cdf", units=list(x="",y=""), detect=FALSE, ties=TRUE) {
+autonpde<-function(namobs,namsim,iid,ix,iy,imdv=0,icens=0,icov=0, iipred=0,
+                   boolsave=TRUE,namsav="output",type.graph="eps",verbose=FALSE, 
+                   calc.npde=TRUE,calc.pd=TRUE,decorr.method="cholesky",
+                   cens.method="cdf", units=list(x="",y=""), detect=FALSE, ties=TRUE) {
 # output is deprecated, now using invisible
     # if(is.data.frame(namobs)) namobs<-deparse(substitute(namobs))
     # if(is.data.frame(namsim)) namsim<-deparse(substitute(namsim))
     if(missing(iid)) iid<-""
     if(missing(ix)) ix<-""
     if(missing(iy)) iy<-""
-    xdat<-npdeData(name.data=namobs,header=TRUE,name.group=iid, name.predictor=ix,name.response=iy,name.covariates=icov,name.miss=imdv, name.cens=icens,name.ipred=iipred,units=units,verbose=verbose)
+    xdat<-npdeData(name.data=namobs,header=TRUE,name.group=iid, 
+                   name.predictor=ix,name.response=iy,name.covariates=icov,name.miss=imdv, 
+                   name.cens=icens,name.ipred=iipred,units=units,detect=detect,verbose=verbose)
     xsim<-npdeSimData(npde.data=xdat,name.simdata=namsim,verbose=verbose)
 #    cat("Data and sim.data object created\n")
 #    if(cens.method=="cdf" & !calc.pd) {
@@ -143,7 +148,9 @@ autonpde<-function(namobs,namsim,iid,ix,iy,imdv=0,icens=0,icov=0, iipred=0,bools
       calc.pd<-TRUE
       cat("To compute npde with the",cens.method," method, pd need to be computed first, changing to calc.pd.\n")
     }
-    opt<-list(boolsave=boolsave,namsav=namsav,type.graph=type.graph, verbose=verbose,calc.npde=calc.npde, calc.pd=calc.pd,decorr.method=decorr.method, cens.method=cens.method, ties=ties)
+    opt<-list(boolsave=boolsave,namsav=namsav,type.graph=type.graph, 
+              verbose=verbose,calc.npde=calc.npde, calc.pd=calc.pd,
+              decorr.method=decorr.method, cens.method=cens.method, ties=ties)
     npde.obj<-new(Class="NpdeObject",data=xdat,sim.data=xsim,options=opt)
 #    cat("Npde object created\n")
     npde.obj["prefs"]<-setPlotOptions(npde.obj)
