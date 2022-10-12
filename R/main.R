@@ -130,8 +130,8 @@ npde<-function() {
 #' @export
 autonpde<-function(namobs,namsim,iid,ix,iy,imdv=0,icens=0,icov=0, iipred=0,boolsave=TRUE,namsav="output",type.graph="eps",verbose=FALSE, calc.npde=TRUE,calc.pd=TRUE,decorr.method="cholesky",cens.method="cdf", units=list(x="",y=""), detect=FALSE, ties=TRUE) {
 # output is deprecated, now using invisible
-    if(is.data.frame(namobs)) namobs<-deparse(substitute(namobs))
-    if(is.data.frame(namsim)) namsim<-deparse(substitute(namsim))
+    # if(is.data.frame(namobs)) namobs<-deparse(substitute(namobs))
+    # if(is.data.frame(namsim)) namsim<-deparse(substitute(namsim))
     if(missing(iid)) iid<-""
     if(missing(ix)) ix<-""
     if(missing(iy)) iy<-""
